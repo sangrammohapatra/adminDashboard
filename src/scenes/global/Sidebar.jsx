@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -39,7 +39,34 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  let initialSelected = "Dashboard"; // Default value
+  if (pathname === "/team") {
+    initialSelected = "Manage Team";
+  } else if (pathname === "/contacts") {
+    initialSelected = "Contacts Information";
+  } else if (pathname === "/invoices") {
+    initialSelected = "Invoices Balances";
+  } else if (pathname === "/form") {
+    initialSelected = "Profile Form";
+  } else if (pathname === "/calendar") {
+    initialSelected = "Calendar";
+  } else if (pathname === "/faq") {
+    initialSelected = "FAQ Page";
+  } else if (pathname === "/bar") {
+    initialSelected = "Bar Chart";
+  } else if (pathname === "/pie") {
+    initialSelected = "Pie Chart";
+  } else if (pathname === "/line") {
+    initialSelected = "Line Chart";
+  } else if (pathname === "/geography") {
+    initialSelected = "Geography Chart";
+  }
+
+  const [selected, setSelected] = useState(initialSelected);
 
   return (
     <Box
